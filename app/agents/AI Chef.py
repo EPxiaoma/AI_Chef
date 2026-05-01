@@ -27,15 +27,15 @@ web_search = TavilySearch(
     topic="general",
 )
 
-# # 3. 记忆管理：采用 sqlite
-# # 连接 sqlite
-# connection = sqlite3.connect("resources/AI_Chef.db", check_same_thread=False)
-# # 初始化 checkpointer
-# checkpointer = SqliteSaver(connection)
-# # 自动建表
-# checkpointer.setup()
-# # 记忆配置
-# config = {"configurable": {"thread_id": "1"}}
+# 3. 记忆管理：采用 sqlite
+# 连接 sqlite
+connection = sqlite3.connect("../db/AI_Chief.db", check_same_thread=False)
+# 初始化 checkpointer
+checkpointer = SqliteSaver(connection)
+# 自动建表
+checkpointer.setup()
+# 记忆配置
+config = {"configurable": {"thread_id": "1"}}
 
 # 4. 系统提示词
 system_prompt = """
@@ -52,6 +52,6 @@ system_prompt = """
 agent = create_agent(
     model=model,
     tools=[web_search],
-    # checkpointer=checkpointer,
+    checkpointer=checkpointer,
     system_prompt=system_prompt
 )
